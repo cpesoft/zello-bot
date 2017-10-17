@@ -1,0 +1,20 @@
+version: "2"
+
+services:
+  zellobot:
+    build: .
+    image: cpesoft/zello-bot
+    restart: always
+    environment:
+      X11VNC_PASSWORD: zello
+    ports:
+      - '5900:5900'
+    networks:
+      - zellonet
+
+networks:
+  zellonet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
