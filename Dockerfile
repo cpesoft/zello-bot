@@ -57,6 +57,7 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y --forc
     # Common packages
     nano \
     mc \
+    p7zip-full \
     # wine
     winehq-stable \
     winetricks \
@@ -66,7 +67,7 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y --forc
     fluxbox
 
 # if mono and gecko gets not detected automatically and wine prompts to install them,
-# you have to use the correct versions which correspond to the currently 
+# you have to use the correct versions which correspond to the currently
 # installed wine version
 # to find out for which files wine is looking, start wine with:
 # env WINEDEBUG=trace+all wine foo.exe
@@ -79,6 +80,27 @@ RUN \
     mkdir -p /opt/wine-stable/share/wine/gecko && \
     wget http://dl.winehq.org/wine/wine-gecko/2.47/wine_gecko-2.47-x86.msi -O /opt/wine-stable/share/wine/gecko/wine_gecko-2.47-x86.msi && \
     wget http://dl.winehq.org/wine/wine-gecko/2.47/wine_gecko-2.47-x86_64.msi -O /opt/wine-stable/share/wine/gecko/wine_gecko-2.47-x86_64.msi
+
+###############################################################################
+# ZELLO INSTALLATION
+###############################################################################
+# This is a hack and prone to fail in any future zello release
+RUN \
+    mkdir -p "/tmp/zellosetup-tmp" && \
+
+    mkdir -p "$ZELLO_ROOT/Lng" && \
+    mkdir -p "$ZELLO_ROOT/Snd" && \
+    mkdir -p "$ZELLO_ROOT/custom" && \
+    cd "/tmp/zellosetup-tmp" && \
+
+    wget 'http://zello.com/data/ZelloSetup.exe' && \
+    7z e ZelloSetup.exe && \
+
+    cp "de" "$ZELLO_ROOT/Lng/" && \
+    cp "en" "$ZELLO_ROOT/Lng/" && \
+    cp *.wav "$ZELLO_ROOT/Snd/" && \
+    cp "Zello.exe" "$ZELLO_ROOT" && \
+    rm -rf /tmp/zellosetup-tmp
 
 
 ###############################################################################
