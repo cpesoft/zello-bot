@@ -102,6 +102,10 @@ RUN \
     cp "Zello.exe" "$ZELLO_ROOT" && \
     rm -rf /tmp/zellosetup-tmp
 
+# Add start script
+ADD build/zello "$ZELLO_ROOT/"
+RUN chmod a+x   "$ZELLO_ROOT/zello"
+
 
 ###############################################################################
 # CONFIGURE PHUSION/BASEIMAGE SETTINGS
