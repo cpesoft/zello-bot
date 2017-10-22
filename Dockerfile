@@ -144,8 +144,13 @@ VOLUME /root/zello/custom
 # CLEAN UP
 ###############################################################################
 
-# clean tmp dir and apt lists
-#RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# uninstall not needed packages, clean tmp dir and apt lists
+RUN \
+  apt-get purge \
+  p7zip-full \
+
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # unset proxy
 ENV http_proxy ""
