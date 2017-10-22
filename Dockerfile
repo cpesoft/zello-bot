@@ -24,6 +24,10 @@ ENV ZELLO_ROOT $HOME/zello
 ENV X11VNC_PASSWORD password
 ENV DISPLAY=:99
 
+# suppress all wine console logs
+# you can set this to 'trace+all' to get all trace information
+ENV WINEDEBUG=-all
+
 RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 CMD ["/sbin/my_init"]
