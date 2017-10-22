@@ -70,11 +70,11 @@ RUN apt-get update && \
     p7zip-full \
     # wine
     winehq-stable \
-    winetricks \
     # xvfb, x11vnc, fluxbox for remote X
     xvfb \
     x11vnc \
-    fluxbox
+    fluxbox \
+    xterm
 
 # if mono and gecko gets not detected automatically and wine prompts to install them,
 # you have to use the correct versions which correspond to the currently
