@@ -43,7 +43,7 @@ RUN \
 
 # Install packages needed for ppa handling
 RUN \
-    apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
+    apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends \
     curl \
     wget \
     python-software-properties \
@@ -62,18 +62,19 @@ RUN \
 # INSTALL PACKAGES
 ###############################################################################
 
-RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y --force-yes \
+RUN apt-get update && \
+    DEBIAN_FRONTEND="noninteractive" apt-get install -y --force-yes --no-install-recommends \
     # Common packages
     nano \
     mc \
     p7zip-full \
     # wine
     winehq-stable \
-    winetricks \
     # xvfb, x11vnc, fluxbox for remote X
     xvfb \
     x11vnc \
-    fluxbox
+    fluxbox \
+    xterm
 
 # if mono and gecko gets not detected automatically and wine prompts to install them,
 # you have to use the correct versions which correspond to the currently
@@ -143,8 +144,13 @@ VOLUME /root/zello/custom
 # CLEAN UP
 ###############################################################################
 
-# clean tmp dir and apt lists
-#RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# uninstall not needed packages, clean tmp dir and apt lists
+RUN \
+  apt-get purge \
+  p7zip-full \
+
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # unset proxy
 ENV http_proxy ""
