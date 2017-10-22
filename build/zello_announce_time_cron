@@ -1,0 +1,4 @@
+# Add zello_announce_time to cron
+# (for every hour)
+#
+0 * * * * root /root/zello/zello_announce_time

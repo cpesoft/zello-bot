@@ -10,7 +10,16 @@ RUN locale-gen de_DE.UTF-8
 ENV LANG       de_DE.UTF-8
 ENV LC_ALL     de_DE.UTF-8
 
+# Set timezone
+ENV TZ Europe/Berlin
+
+# set HOME
+# see: https://github.com/phusion/baseimage-docker#environment-variables
+RUN echo /root > /etc/container_environment/HOME
 ENV HOME /root
+
+# set other environment variables
+ENV ZELLO_ROOT $HOME/zello
 
 ENV X11VNC_PASSWORD password
 ENV DISPLAY=:99
@@ -106,6 +115,12 @@ RUN \
 ADD build/zello "$ZELLO_ROOT/"
 RUN chmod a+x   "$ZELLO_ROOT/zello"
 
+# zello_announce_time to cron
+ADD build/zello_announce_time "$ZELLO_ROOT/"
+RUN chmod a+x   "$ZELLO_ROOT/zello_announce_time"
+
+ADD build/zello_announce_time_cron /etc/cron.d/
+RUN chmod 700 /etc/cron.d/zello_announce_time_cron
 
 ###############################################################################
 # CONFIGURE PHUSION/BASEIMAGE SETTINGS
@@ -121,6 +136,8 @@ RUN chmod +x        /etc/service/x11vnc/run
 ###############################################################################
 
 EXPOSE 5900
+
+VOLUME /root/zello/custom
 
 ###############################################################################
 # CLEAN UP
