@@ -43,7 +43,7 @@ RUN \
 
 # Install packages needed for ppa handling
 RUN \
-    apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
+    apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends \
     curl \
     wget \
     python-software-properties \
@@ -62,7 +62,8 @@ RUN \
 # INSTALL PACKAGES
 ###############################################################################
 
-RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y --force-yes \
+RUN apt-get update && \
+    DEBIAN_FRONTEND="noninteractive" apt-get install -y --force-yes --no-install-recommends \
     # Common packages
     nano \
     mc \
