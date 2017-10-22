@@ -8,9 +8,9 @@ cd $ZELLO_ROOT
 HOURS=`date +"%H"`
 case $HOURS in
 
-09) ./zello /contact="$ZELLO_CHANNEL" /audio="custom/09.wav" /report="zello_announce_time.log" /report="zello_announce_time.log" ;;
-12) ./zello /contact="$ZELLO_CHANNEL" /audio="custom/12.wav" /report="zello_announce_time.log" /report="zello_announce_time.log" ;;
-15) ./zello /contact="$ZELLO_CHANNEL" /audio="custom/15.wav" /report="zello_announce_time.log" /report="zello_announce_time.log" ;;
-18) ./zello /contact="$ZELLO_CHANNEL" /audio="custom/18.wav" /report="zello_announce_time.log" /report="zello_announce_time.log" ;;
+09) ./zello /contact="$ZELLO_CHANNEL" /audio="custom/09.wav" /report="zello_announce_time.log" ;;
+12) ./zello /contact="$ZELLO_CHANNEL" /audio="custom/12.wav" /report="zello_announce_time.log" ;;
+15) ./zello /contact="$ZELLO_CHANNEL" /audio="custom/15.wav" /report="zello_announce_time.log" ;;
+18) ./zello /contact="$ZELLO_CHANNEL" /audio="custom/18.wav" /report="zello_announce_time.log" ;;
 
 esac
